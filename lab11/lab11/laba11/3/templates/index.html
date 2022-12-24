@@ -1,0 +1,29 @@
+<!doctype html>
+
+<h3>Blocks:</h3>
+<div id="task1"></div>
+
+<script>
+    // webSocket = new WebSocket("ws://151.248.113.144:8091/");
+    webSocket = new WebSocket("ws://localhost:8091/");
+
+    webSocket.onmessage = (event) => {
+        // console.log(event.data)
+
+        let text;
+        const blocks = event.data
+        const msg = JSON.parse(event.data);
+        // const products = msg.blocks;
+        console.log(msg[0])
+
+        let div = document.createElement("div")
+        for (let i = 0; i < msg.length; i++) {
+            div.prepend("\n")
+            div.prepend("Count transactions: "+ msg[i].Transactions.length)
+            div.prepend("Number: "+msg[i].Number + ", ")
+            div.prepend("<!!!>")
+        }
+        document.getElementById("task1").innerText = div.innerText
+
+    }
+</script>
